@@ -18,8 +18,15 @@
   xhr.responseType=objParam.type;
   if(objParam.mime) xhr.overrideMimeType(objParam.mime);
   xhr.open(objParam.method,url,true);
-  if(objParam.method=="post")
-    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+  if(objParam.headers){
+    let arHeaders=Object.entries(objParam.headers);
+    for(let [ar1,ar2] of arHeaders)
+      xhr.setRequestHeader(ar1,ar2);
+  }
+  if(objParam.method=="post"){
+    if(!objParam.headers["Content-Type"])
+      xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+  }
   if(objParam.method=="get")
     xhr.send();
   else
