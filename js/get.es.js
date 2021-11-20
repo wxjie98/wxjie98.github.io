@@ -24,7 +24,7 @@
       xhr.setRequestHeader(ar1,ar2);
   }
   if(objParam.method=="post"){
-    if(!objParam.headers["Content-Type"])
+    if(!objParam.headers || !objParam.headers["Content-Type"])
       xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
   }
   if(objParam.method=="get")
